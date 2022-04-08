@@ -1,0 +1,40 @@
+DO THE BELOW
+protected void btn_Login_Click(object sender, EventArgs e)   
+{  
+    string constr = System.Configuration.ConfigurationManager.ConnectionStrings["Constr"].ConnectionString;  
+    SqlConnection con = new SqlConnection(constr);  
+    string sql = "select count(UserID) from user_login where UserID=@UserID and pwd=@pwd";  
+    SqlCommand cmd = new SqlCommand(sql, con);  
+    SqlParameter[] param = new SqlParameter[2];  
+    param[0] = new SqlParameter("@UserID", txtUSerID.Text);  
+    param[1] = new SqlParameter("@pwd", txtPwd.Text);  
+    cmd.Parameters.Add(param[0]);  
+    cmd.Parameters.Add(param[1]);  
+    con.Open();  
+    object res = cmd.ExecuteScalar();  
+    con.Close();  
+    if (Convert.ToInt32(res) > 0) Response.Redirect("Home.aspx");  
+    else   
+    {  
+        Response.Write("Invalid Credentials");  
+        return;  
+    }  
+}
+
+DO NOT DO THE BELOW
+protected void btn_Login_Click(object sender, EventArgs e)   
+{  
+    string constr = System.Configuration.ConfigurationManager.ConnectionStrings["Constr"].ConnectionString;  
+    SqlConnection con = new SqlConnection(constr);  
+    string sql = "select count(UserID) from user_login where UserID='" + txtUSerID.Text + "' and pwd='" + txtPwd.Text + "'";  
+    SqlCommand cmd = new SqlCommand(sql, con);  
+    con.Open();  
+    object res = cmd.ExecuteScalar();  
+    con.Close();  
+    if (Convert.ToInt32(res) > 0) Response.Redirect("Home.aspx");  
+    else   
+    {  
+        Response.Write("Invalid Credentials");  
+        return;  
+    }  
+} 
