@@ -2,10 +2,6 @@ using System;
 
 namespace CSharpFundamentals
 {
-    public class Person
-    {
-        public int Age;
-    }
     class Program
     {
         static void Main(string[] args)
@@ -34,10 +30,6 @@ using System;
 
 namespace CSharpFundamentals
 {
-    public class Person
-    {
-        public int Age;
-    }
     class Program
     {
         static void Main(string[] args)
